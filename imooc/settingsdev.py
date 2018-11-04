@@ -25,7 +25,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'imooc',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'hanyiwen950407',
         'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }

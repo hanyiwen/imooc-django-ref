@@ -48,8 +48,8 @@ git clone https://github.com/zaxlct/MxOnline_Django
 ```bash
 make dev
 ```
- 
- 
+
+
 - 配置数据库
  1. 确保你已经安装了 MySQL
  2. `settingsdev.py`里的 `DATABASES` 填入你的本地的数据库信息（开发环境），`settings.py` 里填入你服务器的数据库信息（部署环境）。
@@ -65,14 +65,14 @@ make dev
     }
 }
  ```
- 
- 
+
+
 - 创建数据表
 ```bash
 make migrate
 ```
 
- 
+
 - 配置 PyCharm 项目环境变量
 
     1. 第一步：点击 Edit Config
@@ -96,8 +96,8 @@ Value:  imooc.settingsdev
 ```bash
 make run
 ```
- 
- 
+
+
 ### `settingsdev.py` 有什么用？
 项目上线时 `settings.py` 必须设置 `DEBUG=False`，这时 Django 不会用自带的 server 去加载 js/css/img 等静态文件，需要用 nginx 之类的去做静态文件的 server。    
 为了避免来回的修改 `setting.py`，项目开发时的配置在 `settingsdev.py` 里，项目部署上线时的配置在 `settings.py` 里。不要随意修改 `setting.py`。
@@ -125,3 +125,9 @@ In Django 1.10 `django.core.context_processors` has been moved to `django.templa
 
 ### xadmin 不支持 Django 1.11
 django 1.11 `Lib\site-packages\django\forms\widgets.py` 中已经没有了 `RadioFieldRenderer` 这个类，故 [xadmin-python3](https://github.com/zaxlct/MxOnline_Django/tree/xadmin-python3) 分支只支持到 django 1.10
+
+
+
+```
+PyMySQL==0.7.10
+```

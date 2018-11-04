@@ -7,10 +7,10 @@ from organization.models import CourseOrg, Teacher
 
 
 class Course(models.Model):
-    course_org = models.ForeignKey(CourseOrg, verbose_name='课程机构', null=True, blank=True)
+    course_org = models.ForeignKey(CourseOrg, verbose_name='课程机构', null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=52, verbose_name='课程名字')
     desc =  models.CharField(max_length=300, verbose_name='课程描述')
-    teacher = models.ForeignKey(Teacher, verbose_name='讲师', null=True, blank=True)
+    teacher = models.ForeignKey(Teacher, verbose_name='讲师', null=True, blank=True, on_delete=models.CASCADE)
     detail = models.TextField(verbose_name='课程详情')
     degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')), max_length=2, verbose_name='难度')
     learn_times = models.IntegerField(default=0, verbose_name='学习时长(分钟数)')
@@ -52,7 +52,7 @@ class BannerCourse(Course):
 
 # 章节信息
 class Lesson(models.Model):
-    course = models.ForeignKey(Course, verbose_name='课程')
+    course = models.ForeignKey(Course, verbose_name='课程', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name='章节名')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
@@ -68,7 +68,7 @@ class Lesson(models.Model):
 
 
 class Video(models.Model):
-    lesson = models.ForeignKey(Lesson, verbose_name='章节')
+    lesson = models.ForeignKey(Lesson, verbose_name='章节', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name='视频名')
     url = models.URLField(max_length=200, verbose_name='访问地址', default='www.baidu.com')
     learn_times = models.IntegerField(default=0, verbose_name='视频时长(分钟数)')
@@ -83,7 +83,7 @@ class Video(models.Model):
 
 
 class CourseResource(models.Model):
-    course = models.ForeignKey(Course, verbose_name='课程')
+    course = models.ForeignKey(Course, verbose_name='课程', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name='课件名')
     download = models.FileField(upload_to='course/resource/%Y/%m', verbose_name='资源文件', max_length=100)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
