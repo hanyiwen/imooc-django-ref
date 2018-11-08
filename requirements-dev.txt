@@ -1,1 +1,2 @@
 django-debug-toolbar
+django-reversion~=2.0.0

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
 ]
 
 # UserProfile 覆盖了 django 内置的 user 表
+# 此处重载是为了使我们的UserProfile生效
 AUTH_USER_MODEL = 'users.UserProfile'
 
 MIDDLEWARE = [

@@ -9,7 +9,7 @@ from organization.models import CourseOrg, Teacher
 class Course(models.Model):
     course_org = models.ForeignKey(CourseOrg, verbose_name='课程机构', null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=52, verbose_name='课程名字')
-    desc =  models.CharField(max_length=300, verbose_name='课程描述')
+    desc = models.CharField(max_length=300, verbose_name='课程描述')
     teacher = models.ForeignKey(Teacher, verbose_name='讲师', null=True, blank=True, on_delete=models.CASCADE)
     detail = models.TextField(verbose_name='课程详情')
     degree = models.CharField(choices=(('cj', '初级'), ('zj', '中级'), ('gj', '高级')), max_length=2, verbose_name='难度')

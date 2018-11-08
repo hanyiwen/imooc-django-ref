@@ -3,9 +3,10 @@ from datetime import datetime
 from django.db import models
 
 # Create your models here.
-
+# 引入我们CourseComments所需要的外键models
 from users.models import UserProfile
 from courses.models import Course
+
 
 class UserAsk(models.Model):
     name = models.CharField(max_length=20, verbose_name='姓名')
