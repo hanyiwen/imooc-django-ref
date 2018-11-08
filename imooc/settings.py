@@ -22,6 +22,7 @@ pymysql.install_as_MySQLdb()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 设置 apps, extra_apps 目录
+# 同理,插入第0是希望它先搜索我们app下东西
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 

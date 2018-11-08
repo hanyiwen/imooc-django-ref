@@ -49,6 +49,9 @@ class UserFavorite(models.Model):
 
 
 class UserMessage(models.Model):
+    # 因为我们的消息有两种:发给全员和发给某一个用户。
+    # 所以如果使用外键，每个消息会对应要有用户。很难实现全员消息。
+    # 机智版 为0发给所有用户，不为0就是发给用户的id
     # 如果 为 0 代表全局消息，否则就是用户的 ID
     user = models.IntegerField(default=0, verbose_name='接受用户')
     message = models.CharField(max_length=500, verbose_name='消息内容')
