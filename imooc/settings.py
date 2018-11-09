@@ -155,9 +155,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-EMAIL_HOST = 'smtp.qq.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = '10581290@qq.com'
-EMAIL_HOST_PASSWORD = 'scdxhwjinajgbjjc'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'hyw1310861333@gmail.com'
+EMAIL_HOST_PASSWORD = 'hanyiwen950407'
 EMAIL_USE_TLS = True
-EMAIL_FROM = '10581290@qq.com'
+EMAIL_FROM = 'hyw1310861333@gmail.com'

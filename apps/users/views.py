@@ -60,12 +60,16 @@ def user_login(request):
 
 # 用户登录
 class LoginView(View):
+    # 直接调用get方法免去判断
     def get(self, request):
+        # render就是渲染html返回用户
+        # render三变量: request 模板名称 一个字典写明传给前端的值
         return render(request, 'login.html')
 
     def post(self, request):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
+            # 取不到时为空，username，password为前端页面name值
             user_name = request.POST.get('username', '')
             password = request.POST.get('password', '')
             # 上面的 authenticate 方法 return user

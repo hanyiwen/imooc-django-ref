@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name='login'),
 
     # 验证用户注册后，在邮件里点击注册链接
+    # 这里通过?p将后面.*代表全部提取的正则，符合的内容传入参数active_code中/$代表以/$为结尾
     url(r'^active/(?P<active_code>.*)/$', ActiveUserView.as_view(), name='user_active'),
 
     # 注册页面
