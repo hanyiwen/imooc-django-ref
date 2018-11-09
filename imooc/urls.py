@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
-from django.views.static import serve #处理静态文件
+from django.views.static import serve  # 处理静态文件
 
 from imooc.settings import MEDIA_ROOT
 
@@ -28,12 +28,12 @@ from users.views import IndexView
 from users.views import LoginView, RegisterView, ActiveUserView, ForgetPwdView, ResetView, ModifyPwdView, LogoutView
 
 urlpatterns = [
-    url(r'^admin/', xadmin.site.urls),
+    url(r'^xadmin/', xadmin.site.urls),
     url(r'^$', IndexView.as_view(), name="index"),
     # 验证码
     url(r'^captcha/', include('captcha.urls')),
 
-    #配置上传文件的访问处理函数
+    # 配置上传文件的访问处理函数
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
     # TemplateView 只返回静态模板，不用在 views 里写逻辑
@@ -54,13 +54,13 @@ urlpatterns = [
     # 退出登录
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
 
-    #用户在邮件里点击重置密码链接
+    # 用户在邮件里点击重置密码链接
     url(r'^reset/(?P<active_code>.*)/$', ResetView.as_view(), name='reset_pwd'),
 
     # 重置密码表单 POST 请求
     url(r'^modify_pwd/$', ModifyPwdView.as_view(), name='modify_pwd'),
 
-    #课程机构相关 URL
+    # 课程机构相关 URL
     url(r'^org/', include('organization.urls', namespace='org')),
 
     # 课程相关 URL 配置
@@ -74,13 +74,14 @@ urlpatterns = [
 handler404 = 'users.views.page_not_found'
 handler500 = 'users.views.page_error'
 
-
 if settings.DEBUG:
     # debug_toolbar 插件配置
     import debug_toolbar
+
     urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))
 else:
     # 项目部署上线时使用
     from imooc.settings import STATIC_ROOT
+
     # 配置静态文件访问处理
     urlpatterns.append(url(r'^static/(?P<path>.*)$', serve, {'document_root': STATIC_ROOT}))

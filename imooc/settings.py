@@ -38,6 +38,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # AUTH 方法（支持邮箱登录）
+# 设置邮箱和用户名均可登录
 AUTHENTICATION_BACKENDS = ('users.views.CustomBackend',)
 
 # Application definition
