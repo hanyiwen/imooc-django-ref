@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -20,7 +21,10 @@ class CityDict(models.Model):
 
 class CourseOrg(models.Model):
     name = models.CharField(max_length=50, verbose_name='机构名称')
-    category = models.CharField(max_length=20, choices=( ('pxjg', '培训机构'), ('gr', '个人'), ('gx', '高校') ), default='pxjg', verbose_name='机构类别' )
+    category = models.CharField(max_length=20,
+                                choices=(('pxjg', '培训机构'), ('gr', '个人'), ('gx', '高校')),
+                                default='pxjg',
+                                verbose_name='机构类别')
     desc = models.TextField(verbose_name='机构描述')
     tag = models.CharField(default=u'全国知名', max_length=10, verbose_name=u'机构标签')
     click_nums = models.IntegerField(default=0, verbose_name='点击数')
@@ -66,4 +70,4 @@ class Teacher(models.Model):
         return self.course_set.all().count()
 
     def __str__(self):
-        return self.name
+        return "[{0}]的教师: {1}".format(self.org, self.name)

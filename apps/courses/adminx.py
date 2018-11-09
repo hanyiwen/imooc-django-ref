@@ -4,6 +4,7 @@ __date__ = '2017/4/2 下午5:08'
 import xadmin
 from .models import Course, Lesson, Video, CourseResource, BannerCourse
 
+
 # 添加课程的时候可以顺便添加章节
 class LessonInline:
     model = Lesson
@@ -20,7 +21,7 @@ class CourseAdmin:
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
                     'click_nums', 'add_time']
     search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
-                    'click_nums']
+                     'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums', 'click_nums', 'add_time']
 
     ordering = ['-click_nums']
@@ -29,10 +30,10 @@ class CourseAdmin:
     readonly_fields = ['click_nums']
     exclude = ['fav_nums']
 
-    #Inline # 添加课程的时候可以顺便添加章节、课程资源
+    # Inline # 添加课程的时候可以顺便添加章节、课程资源
     inlines = [LessonInline, CourseResourceInline]
 
-    #重新在这里写一遍的原因是，避免数据重复
+    # 重新在这里写一遍的原因是，避免数据重复
     def queryset(self):
         qs = super(CourseAdmin, self).queryset()
         qs = qs.filter(is_banner=False)
@@ -43,19 +44,19 @@ class BannerCourseAdmin(object):
     list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
                     'click_nums', 'add_time']
     search_fields = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
-                    'click_nums']
+                     'click_nums']
     list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students', 'fav_nums',
-                    'click_nums', 'add_time']
+                   'click_nums', 'add_time']
     ordering = ['-click_nums']
 
     # readonly_fields 和 exclude 的字段不要重复，否则会冲突
     readonly_fields = ['click_nums']
     exclude = ['fav_nums']
 
-    #Inline # 添加课程的时候可以顺便添加章节、课程资源
+    # Inline # 添加课程的时候可以顺便添加章节、课程资源
     inlines = [LessonInline, CourseResourceInline]
 
-    #把轮播图从 User model 里转移到 Course model 里
+    # 把轮播图从 User model 里转移到 Course model 里
     def queryset(self):
         qs = super(BannerCourseAdmin, self).queryset()
         qs = qs.filter(is_banner=True)
@@ -66,6 +67,7 @@ class LessonAdmin:
     list_display = ['course', 'name', 'add_time']
     search_fields = ['course', 'name']
     # course 是一个对象，xadmin 不能搜索，需要指定搜索 course 对象里哪一个属性
+    # __name代表使用外键中name字段
     list_filter = ['course__name', 'name', 'add_time']
 
 
