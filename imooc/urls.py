@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^captcha/', include('captcha.urls')),
 
     # 配置上传文件的访问处理函数
+    # 处理图片显示的url,使用Django自带serve,传入参数告诉它去哪个路径找，我们有配置好的路径MEDIAROOT
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 
     # TemplateView 只返回静态模板，不用在 views 里写逻辑
