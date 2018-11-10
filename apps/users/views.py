@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import ModelBackend
+# 并集运算
 from django.db.models import Q
 from django.views.generic.base import View
 from django.contrib.auth.hashers import make_password
@@ -19,6 +20,7 @@ from courses.models import Course
 
 import json
 
+
 # Create your views here.
 
 
@@ -27,7 +29,10 @@ import json
 class CustomBackend(ModelBackend):
     def authenticate(self, username=None, password=None, **kwargs):
         try:
-            user = UserProfile.objects.get(Q(username = username) | Q(email=username))
+            # 不希望用户存在两个，get只能有一个。两个是get失败的一种原因 Q为使用并集查询
+            user = UserProfile.objects.get(Q(username=username) | Q(email=username))
+            # django的后台中密码加密：所以不能password==password
+            # UserProfile继承的AbstractUser中有def check_password(self, raw_password):
             if user.check_password(password):
                 return user
         except Exception as e:
@@ -55,12 +60,16 @@ def user_login(request):
 
 # 用户登录
 class LoginView(View):
+    # 直接调用get方法免去判断
     def get(self, request):
+        # render就是渲染html返回用户
+        # render三变量: request 模板名称 一个字典写明传给前端的值
         return render(request, 'login.html')
 
     def post(self, request):
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
+            # 取不到时为空，username，password为前端页面name值
             user_name = request.POST.get('username', '')
             password = request.POST.get('password', '')
             # 上面的 authenticate 方法 return user
@@ -76,7 +85,7 @@ class LoginView(View):
         return render(request, 'login.html', {'form_errors': login_form.errors})
 
 
-#用户登出
+# 用户登出
 class LogoutView(View):
     def get(self, request):
         logout(request)
@@ -105,7 +114,7 @@ class RegisterView(View):
             user_profile.is_active = False
             user_profile.save()
 
-            #注册时发送一条消息
+            # 注册时发送一条消息
             user_message = UserMessage()
             user_message.user = user_profile.id
             user_message.message = '欢迎注册慕学在线网！'
@@ -216,7 +225,7 @@ class UploadImageView(LoginRequiredMixin, View):
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 
-#用户修改密码
+# 用户修改密码
 # 用户在个人中心修改密码
 class UpdatePwdView(LoginRequiredMixin, View):
     def post(self, request):
@@ -282,24 +291,24 @@ class UpdateEmailView(LoginRequiredMixin, View):
 # 我的课程
 class MyCourseView(LoginRequiredMixin, View):
     def get(self, request):
-     user_courses = UserCourse.objects.filter(user=request.user)
-     return render(request, 'usercenter-mycourse.html', {
-         'user_courses': user_courses,
-     })
+        user_courses = UserCourse.objects.filter(user=request.user)
+        return render(request, 'usercenter-mycourse.html', {
+            'user_courses': user_courses,
+        })
 
 
 # 我收藏的课程机构
 class MyFavOrgView(LoginRequiredMixin, View):
     def get(self, request):
-     org_list = []
-     fav_orgs = UserFavorite.objects.filter(user=request.user, fav_type=2)
-     for fav_org in fav_orgs:
-         org_id = fav_org.fav_id
-         org = CourseOrg.objects.get(id=org_id)
-         org_list.append(org)
-     return render(request, 'usercenter-fav-org.html', {
-         'org_list': org_list,
-     })
+        org_list = []
+        fav_orgs = UserFavorite.objects.filter(user=request.user, fav_type=2)
+        for fav_org in fav_orgs:
+            org_id = fav_org.fav_id
+            org = CourseOrg.objects.get(id=org_id)
+            org_list.append(org)
+        return render(request, 'usercenter-fav-org.html', {
+            'org_list': org_list,
+        })
 
 
 # 我收藏的授课讲师
@@ -336,7 +345,7 @@ class MyMessageView(LoginRequiredMixin, View):
         # 如果 user = 0 ，代表全局消息，所有用户都能收到
         all_message = UserMessage.objects.filter(user=request.user.id)
 
-        #进入到我的消息页面后，把已读的消息清空
+        # 进入到我的消息页面后，把已读的消息清空
         all_unread_message = UserMessage.objects.filter(user=request.user.id, has_read=False)
         for unread_message in all_unread_message:
             unread_message.has_read = True

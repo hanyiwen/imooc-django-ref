@@ -2,7 +2,9 @@ import xadmin
 from xadmin import views
 from xadmin.plugins.auth import UserAdmin
 from .models import EmailVerifyRecord, Banner, UserProfile
-
+from courses.models import Course, Lesson, Video, CourseResource
+from operation.models import CourseComments, UserCourse, UserFavorite, UserMessage, UserAsk
+from organization.models import CityDict, Teacher, CourseOrg
 
 # ----- adminx 全局配置
 class BaseSetting:
@@ -10,10 +12,12 @@ class BaseSetting:
     use_bootswatch = True
 
 
-class GlobalSettings:
-    site_title = '慕学后台管理系统'
-    site_footer = '慕学在线网'
+class GlobalSettings(object):
+    site_title = '测试后台管理系统'
+    site_footer = '测试网'
+    # 收起菜单
     menu_style = 'accordion'
+
 # ------
 
 
@@ -53,4 +57,5 @@ User = get_user_model()
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
 xadmin.site.register(views.BaseAdminView, BaseSetting)
+# 将头部与脚部信息进行注册:
 xadmin.site.register(views.CommAdminView, GlobalSettings)

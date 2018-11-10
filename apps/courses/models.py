@@ -3,6 +3,8 @@ from datetime import datetime
 from django.db import models
 
 from organization.models import CourseOrg, Teacher
+
+
 # Create your models here.
 
 
@@ -64,7 +66,7 @@ class Lesson(models.Model):
         return self.video_set.all()
 
     def __str__(self):
-        return self.name
+        return '《{0}》课程的章节 >> {1}'.format(self.course, self.name)
 
 
 class Video(models.Model):

@@ -201,6 +201,7 @@ class ExportPlugin(BaseAdminPlugin):
     def get_xml_export(self, context):
         results = self._get_objects(context)
         stream = io.StringIO()
+        # stream = io.BytesIO()
 
         xml = SimplerXMLGenerator(stream, "utf-8")
         xml.startDocument()
@@ -222,6 +223,8 @@ class ExportPlugin(BaseAdminPlugin):
         file_type = self.request.GET.get('export_type', 'csv')
         response = HttpResponse(
             content_type="%s; charset=UTF-8" % self.export_mimes[file_type])
+        # response = HttpResponse(
+        #     content_type="%s; charset=gbk" % self.export_mimes[file_type])
 
         file_name = self.opts.verbose_name.replace(' ', '_')
         response['Content-Disposition'] = ('attachment; filename=%s.%s' % (

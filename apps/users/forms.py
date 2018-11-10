@@ -6,7 +6,12 @@ from captcha.fields import CaptchaField
 
 from .models import UserProfile
 
+
+# forms中的名称username和password必须和html中的一致。
+# 毕竟他是使用的request.POST
+# 而request是从前面传过来的
 class LoginForm(forms.Form):
+    # 用户名密码不能为空
     username = forms.CharField(required=True)
     password = forms.CharField(required=True, min_length=5)
 
