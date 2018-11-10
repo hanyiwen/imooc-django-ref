@@ -37,7 +37,7 @@ class OrgView(View):
         elif sort == 'courses':
             all_orgs = all_orgs.order_by('-course_nums')
 
-        #筛选完成之后再进行统计
+        # 筛选完成之后再进行统计
         org_nums = all_orgs.count()
 
         # 分页
@@ -112,10 +112,10 @@ class OrgCourseView(View):
         course_org = CourseOrg.objects.get(id=int(org_id))
         all_courses = course_org.course_set.all()
 
-        #初始化判断是否收藏
+        # 初始化判断是否收藏
         has_fav = False
         if request.user.is_authenticated():
-            if UserFavorite.objects.filter(user=request.user, fav_id = course_org.id, fav_type=2):
+            if UserFavorite.objects.filter(user=request.user, fav_id=course_org.id, fav_type=2):
                 has_fav = True
 
         # 分页
