@@ -140,6 +140,7 @@ USE_I18N = True
 
 USE_L10N = True
 
+# 数据库存储使用时间，True时间会被存为UTC的时间
 USE_TZ = False  # 数据库取本地时间
 
 # Static files (CSS, JavaScript, Images)
