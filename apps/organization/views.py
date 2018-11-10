@@ -47,7 +47,7 @@ class OrgView(View):
             page = 1
 
         p = Paginator(all_orgs, 2, request=request)
-
+        # 创建对应页码的page对象 页码从1开始
         orgs = p.page(page)
 
         return render(request, 'org-list.html', {
