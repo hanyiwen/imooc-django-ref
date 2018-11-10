@@ -83,14 +83,16 @@
         <!-- 分页器 -->
         <div class="pageturn">
           <ul class="pagelist">
+            {#  如果有，获取上一页 #}
             {% if all_orgs.has_previous %}
             <li class="long">
               <a href="?{{ all_orgs.previous_page_number.querystring }}" class="prev">上一页</a>
             </li>
             {% endif %}
-
+            {# 判断剩余页面的显示方法： #}
             {% for page in all_orgs.pages %}
               {% if page %}
+                {# 判断page和 all_orgs.number是否相等 ： #}
                 {% ifequal page all_orgs.number %}
                   <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
                 {% else %}
@@ -100,6 +102,7 @@
                 <li class="none"><a href="">...</a></li>
               {% endif %}
             {% endfor %}
+            {#  如果有，获取下一页 #}
             {% if all_orgs.has_next %}
               <li class="long"><a href="?{{ all_orgs.next_page_number.querystring }}">下一页</a></li>
             {% endif %}
