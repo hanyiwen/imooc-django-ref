@@ -2,6 +2,7 @@ import json
 
 from django.shortcuts import render
 from django.views.generic import View
+# HttpResponse类指明给用户返回哪种类型数据
 from django.http import HttpResponse
 from django.db.models import Q
 # Create your views here.
@@ -67,11 +68,16 @@ class AddUserAskView(View):
         user_ask_form = UserAskForm(request.POST)
         res = dict()
         if user_ask_form.is_valid():
+            # 这里是modelform和form的区别
+            # 它有model的属性
+            # 当commit为true进行真正保存
             user_ask_form.save(commit=True)
             res['status'] = 'success'
         else:
             res['status'] = 'fail'
             res['msg'] = '添加出错'
+        # 这样就不需要把一个一个字段取出来然后存到model的对象中之后save
+        # 如果保存成功,返回json字符串,后面content type是告诉浏览器的,
         return HttpResponse(json.dumps(res), content_type='application/json')
 
 

@@ -17,11 +17,9 @@ class UserAskForm(forms.ModelForm):
     # 还可以新增字段
     # price = forms.CharField(required=True, min_length=2, max_length=20)
 
-
     class Meta:
         model = UserAsk
         fields = ['name', 'mobile', 'course_name']
-
 
     # def clean_name(self):
     # def clean_course_name(self):
