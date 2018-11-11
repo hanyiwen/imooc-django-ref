@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <title>{% block custom_title %}机构首页{% endblock %}</title>
+    <title>
+        {% block custom_title %}机构首页{% endblock %}
+    </title>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -28,8 +30,9 @@
                     {% if request.user.is_authenticated %}
                         <div class="personal">
                             <dl class="user fr">
-                                <dd>{{ request.user.nick_name }}<img class="down fr"
-                                                                     src="{% static 'images/top_down.png' %}"/></dd>
+                                <dd>{{ request.user.nick_name }}
+                                    <img class="down fr" src="{% static 'images/top_down.png' %}"/>
+                                </dd>
                                 <dt><img width="20" height="20" src="{{ MEDIA_URL }}{{ request.user.image }}"/></dt>
                             </dl>
                             <div class="userdetail">
@@ -105,14 +108,18 @@
     <div class="wp list personal_list comp">
         <div class="left">
             <ul>
-                <li class="{% ifequal current_page 'home' %}active2{% endifequal %}"><a
-                        href="{% url 'org:org_home' course_org.id %}">机构首页</a></li>
-                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}"><a
-                        href="{% url 'org:org_course' course_org.id %}">机构课程</a></li>
-                <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}"><a
-                        href="{% url 'org:org_desc' course_org.id %}">机构介绍</a></li>
-                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}"><a
-                        href="{% url 'org:org_teacher' course_org.id %}">机构讲师</a></li>
+                <li class="{% ifequal current_page 'home' %}active2{% endifequal %}">
+                    <a href="{% url 'org:org_home' course_org.id %}">机构首页</a>
+                </li>
+                <li class="{% ifequal current_page 'course' %}active2{% endifequal %}">
+                    <a href="{% url 'org:org_course' course_org.id %}">机构课程</a>
+                </li>
+                <li class="{% ifequal current_page 'desc' %}active2{% endifequal %}">
+                    <a href="{% url 'org:org_desc' course_org.id %}">机构介绍</a>
+                </li>
+                <li class="{% ifequal current_page 'teacher' %}active2{% endifequal %}">
+                    <a href="{% url 'org:org_teacher' course_org.id %}">机构讲师</a>
+                </li>
             </ul>
         </div>
 
@@ -140,7 +147,6 @@
 <script src="{% static 'js/plugins/jquery.raty.js' %}"></script>
 <script>
     //收藏分享
-    //收藏分享
     function add_fav(current_elem, fav_id, fav_type) {
         $.ajax({
             cache: false,
@@ -159,7 +165,6 @@
                     } else {
                         alert(data.msg)
                     }
-
                 } else if (data.status == 'success') {
                     current_elem.text(data.msg)
                 }
