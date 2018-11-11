@@ -34,6 +34,7 @@ class Course(models.Model):
     def get_zj_nums(self):
         return self.lesson_set.all().count()
 
+    # 谁的里面添加了它做外键，他都可以取出来
     def get_learn_users(self):
         return self.usercourse_set.all()[:5]
 
