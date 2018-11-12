@@ -107,6 +107,7 @@ class CourseInfoView(LoginRequiredMixin, View):
         user_ids = [user_course.user.id for user_course in user_courses]
         # 两个下划线代表我传进来的是一个list，你进行遍历。
         all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
+        # 是否会有重复的课程？
         course_ids = [user_course.course.id for user_course in all_user_courses]
 
         relate_courses = Course.objects.filter(id__in=course_ids).order_by('-click_nums')[:5]

@@ -41,6 +41,9 @@ class Course(models.Model):
     def get_course_lesson(self):
         return self.lesson_set.all()
 
+    def get_one_course_resource(self):
+        return self.courseresource_set.get()
+
     def __str__(self):
         return self.name
 
