@@ -95,7 +95,6 @@
                                         </div>
                                     </li>
                                 {% endfor %}
-
                             </ul>
                         </div>
 
@@ -108,8 +107,10 @@
                                 <ul class="downlist">
                                     {% for course_resource in all_resources %}
                                         <li>
-                                            <span><i
-                                                    class="aui-iconfont aui-icon-file"></i>{{ course_resource.name }}</span>
+                                            <span>
+                                                <i class="aui-iconfont aui-icon-file"></i>
+                                                {{ course_resource.name }}
+                                            </span>
                                             <a href="{{ MEDIA_URL }}{{ course_resource.download }}" class="downcode"
                                                target="_blank">下载</a>
                                         </li>
@@ -123,8 +124,10 @@
                                         <img src='{{ MEDIA_URL }}{{ course.teacher.image }}' width='80' height='80'/>
                                     </a>
                                     <span class="tit">
-                  <a href="/u/315464/courses?sort=publish" target="_blank">{{ course.teacher.name }}</a>
-                </span>
+                                        <a href="/u/315464/courses?sort=publish" target="_blank">
+                                            {{ course.teacher.name }}
+                                        </a>
+                                    </span>
                                     <span class="job">{{ course.teacher.work_position }}</span>
                                 </div>
                                 <div class="course-info-tip">

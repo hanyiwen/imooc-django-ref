@@ -105,6 +105,7 @@ class CourseInfoView(LoginRequiredMixin, View):
         # 得出学过该课程的同学还学过的课程
         user_courses = UserCourse.objects.filter(course=course)
         user_ids = [user_course.user.id for user_course in user_courses]
+        # 两个下划线代表我传进来的是一个list，你进行遍历。
         all_user_courses = UserCourse.objects.filter(user_id__in=user_ids)
         course_ids = [user_course.course.id for user_course in all_user_courses]
 
@@ -155,6 +156,8 @@ class AddCommentView(View):
 
         if course_id and comments:
             course_comments = CourseComments()
+            # get只能取出一条数据，如果有多条抛出异常。没有数据也抛异常
+            # filter取一个列表出来，queryset。没有数据返回空的queryset不会抛异常
             course_comments.course = Course.objects.get(id=course_id)
             course_comments.comments = comments
             course_comments.user = request.user
