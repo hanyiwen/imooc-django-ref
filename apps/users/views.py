@@ -198,7 +198,6 @@ class UserInfoView(LoginRequiredMixin, View):
         if user_info_form.is_valid():
             user_info_form.save()
             res['status'] = 'success'
-
         else:
             res = user_info_form.errors
 
@@ -369,7 +368,8 @@ class MyMessageView(LoginRequiredMixin, View):
 class IndexView(View):
     def get(self, request):
         # 取出轮播图
-        all_banners = Banner.objects.all().order_by('index')
+        # all_banners = Banner.objects.all().order_by('index')
+        all_banners = Banner.objects.all()
         courses = Course.objects.filter(is_banner=False)[:6]
         banner_courses = Course.objects.filter(is_banner=True)[:3]
         course_orgs = CourseOrg.objects.all()[:15]

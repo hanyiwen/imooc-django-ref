@@ -15,23 +15,20 @@
             <div class="fl">
                 <div class="imgslide">
                     <ul class="imgs">
-                        {% for banner in all_banners %}
+                        {% for banner in banner_courses %}
                             <li>
                                 <a href="{{ banner.url }}">
-                                    <img width="1200" height="478" src="{{ MEDIA_URL }}{{ banner.image }}"/>
+                                    <img width="1200" height="478"
+                                         src="{{ MEDIA_URL }}{{ banner.image }}"/>
                                 </a>
                             </li>
                         {% endfor %}
-
                     </ul>
                 </div>
                 <div class="unslider-arrow prev"></div>
                 <div class="unslider-arrow next"></div>
             </div>
-
         </div>
-
-
     </div>
     <!--banner -->
     <section>
@@ -136,7 +133,6 @@
                                     </a>
                                 </li>
                             {% endfor %}
-
                         </ul>
                     </div>
                 </div>

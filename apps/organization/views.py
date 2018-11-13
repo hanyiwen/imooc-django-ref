@@ -209,7 +209,8 @@ class AddFavView(View):
             return HttpResponse(json.dumps(res), content_type='application/json')
 
         # 查询收藏记录
-        exist_records = UserFavorite.objects.filter(user=request.user, fav_id=fav_id, fav_type=fav_type)
+        exist_records = UserFavorite.objects.filter(
+            user=request.user, fav_id=fav_id, fav_type=fav_type)
         if exist_records:
             exist_records.delete()
             self.set_fav_nums(fav_type, fav_id, -1)
