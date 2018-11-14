@@ -6,6 +6,7 @@ from courses.models import Course, Lesson, Video, CourseResource
 from operation.models import CourseComments, UserCourse, UserFavorite, UserMessage, UserAsk
 from organization.models import CityDict, Teacher, CourseOrg
 
+
 # ----- adminx 全局配置
 class BaseSetting:
     enable_themes = True
@@ -17,6 +18,7 @@ class GlobalSettings(object):
     site_footer = '测试网'
     # 收起菜单
     menu_style = 'accordion'
+
 
 # ------
 
