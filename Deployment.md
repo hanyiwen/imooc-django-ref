@@ -39,8 +39,11 @@ docker-compose -v
 
 
 ### 3.修改配置文件
-1. 修改 `conf/nginx/mx_nginx.conf` 中的 IP 和域名，默认都是 `127.0.0.1`，IP 和域名请改成你自己服务器的 IP 和 自己的域名。
-2. `settings.py` 中 `DATABASES` 配置要和 `docker-compose.yml`里的数据库配置保持一致（可以不做修改使用默认值），其中 HOST 为 `mysql`。
+1. 修改 `conf/nginx/mx_nginx.conf` 中的 IP 和域名，
+默认都是 `127.0.0.1`，IP 和域名请改成你自己服务器的 IP 和 自己的域名。
+2. `settings.py` 中 `DATABASES` 配置
+要和 `docker-compose.yml`里的数据库配置保持一致（可以不做修改使用默认值），
+其中 HOST 为 `mysql`。
 
 
 ### 4.启动项目
@@ -63,7 +66,8 @@ docker-compose exec kele_imooc /usr/local/bin/python manage.py collectstatic
 
 ### 7.最后
 - 你可以手动导入你自己的数据到数据库
-- 你也可以用 Docker 作为本地的开发环境，这个时候应使用应修改 `manage.py`, 使用 `settingsdev.py` 而不是 `settings.py`
+- 你也可以用 Docker 作为本地的开发环境，这个时候应使用应修改 `manage.py`, 
+使用 `settingsdev.py` 而不是 `settings.py`
 - 登录 admin 后台时前，别忘了先创建超级用户
 ```bash
 docker-compose exec kele_imooc /usr/local/bin/python manage.py createsuperuser
